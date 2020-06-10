@@ -15,6 +15,19 @@ from algorithms import DecisionTree
 from utils import FileWriter
 
 
+def get_current_test_file_path():
+    return os.getcwd() + "\\test_data"
+
+
+def get_test_file_list(test_file_path):
+    print(test_file_path)
+    f = []
+    for (dirpath, dirnames, filenames) in walk(test_file_path):
+        f.extend(filenames)
+        break
+    return f
+
+
 
 # criterion - parameter :  The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “entropy” for the information gain.
 criterions_array = ["gini" , "entropy" ]
@@ -24,13 +37,18 @@ spliters_array = ["best", "random"]
 file_writer = FileWriter("C:\\aa.txt")
 
 # load all files
-files_loaded = ["1"]
+files_loaded = get_test_file_list(get_current_test_file_path())
+
+print(get_current_test_file_path())
+print(get_test_file_list(get_current_test_file_path()))
 
 #for each file run experiment
 for file in files_loaded:
     # load data from file
-    file_name = "file_name"
-    file_path = "C:\\GIT\\ZWIG\\Data_new\\Normalized\\anova-10-normalized.csv"
+    file_name = file
+    file_path = os.getcwd() + "\\test_data\\" + file_name
+
+    print(file_name)
 
     raw_data_loader = LoadRawData(file_path)
     raw_data = raw_data_loader.load_raw_dataset()
@@ -52,7 +70,7 @@ for file in files_loaded:
             print("result: ",result)
 
             # safe result to txt
-            res_str = file_name+" | "+criterion+" | "+spliter+" | "+str(result)
+            res_str = file_name+" | "+criterion+" | "+spliter+" | "+str(result)+"\n"
             file_writer.write(res_str)
 
 
@@ -64,18 +82,10 @@ file_writer.close()
 
 
 
-# def get_current_test_file_path():
-#     return os.getcwd() + "\\test_data"
-# def get_current_result_dir():
-#     return os.getcwd() + "\\test_output"
+
+
 #
-# def get_test_file_list(test_file_path):
-#     print(test_file_path)
-#     f = []
-#     for (dirpath, dirnames, filenames) in walk(test_file_path):
-#         f.extend(filenames)
-#         break
-#     return f
+
 #
 #
 # def load_dataset(filename):

@@ -9,6 +9,7 @@ class FileWriter:
 
     def write(self, res_str):
         self.writer.write(res_str)
+        self.writer.flush()
 
     def close(self):
         self.writer.close()

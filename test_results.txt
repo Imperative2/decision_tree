@@ -1,0 +1,4 @@
+anova-10-normalized.csv | gini | best | 0.47552346570397114
+anova-10-normalized.csv | gini | random | 0.47339350180505413
+anova-10-normalized.csv | entropy | best | 0.4736101083032491
+anova-10-normalized.csv | entropy | random | 0.47382671480144406
